@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raymond R. Silot - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f9fbfd;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(135deg, #0a2a43, #123c5a);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.3em;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+    nav {
+      background: #123c5a;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeUp 1.5s ease-in-out;
+    }
+    h2 {
+      color: #0a2a43;
+      border-bottom: 3px solid #ffd700;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+    .skills li::before {
+      content: "✔ ";
+      color: #0a2a43;
+      font-weight: bold;
+    }
+    .contact {
+      background: #0a2a43;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .contact a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .icon {
+      margin-right: 8px;
+      color: #ffd700;
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Raymond R. Silot</h1>
+  <p>Credit & Collection Specialist | AR & Inventory Analyst</p>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#academics">Academics</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+  <h2><i class="fas fa-user icon"></i>About Me</h2>
+  <p>I am a Business Administration graduate specializing in Financial Management with over 7 years of experience in credit control, accounts receivable, and inventory analysis. I thrive in dynamic workplaces where I can apply my expertise in financial reporting, reconciliation, and client management.</p>
+</section>
+
+<section id="academics">
+  <h2><i class="fas fa-graduation-cap icon"></i>Academics</h2>
+  <ul>
+    <li><strong>ICCT Colleges Foundation Inc.</strong> — BSBA Major in Financial Management (2011–2015)</li>
+    <li><strong>PAYAS National High School</strong> (2002–2006)</li>
+    <li><strong>PAYAS Elementary School</strong> (1996–2002)</li>
+  </ul>
+</section>
+
+<section id="experience">
+  <h2><i class="fas fa-briefcase icon"></i>Experience</h2>
+  <ul>
+    <li><strong>Accenture Inc.</strong> — Order to Cash Associate (Nov 2024 – Current)</li>
+    <li><strong>VXI Global Solutions Inc.</strong> — Customer Account Specialist / AR (Jul 2024 – Oct 2024)</li>
+    <li><strong>NTT Limited Philippines</strong> — Collection Specialist (Oct 2022 – Jun 2024)</li>
+    <li><strong>Avolution Inc.</strong> — Accounting Assistant / Inventory Analyst (Jul 2021 – Oct 2022)</li>
+    <li><strong>Philippine Vending Group</strong> — Accounting Assistant / Inventory Analyst (Jun 2020 – Jul 2021)</li>
+    <li><strong>Smart Masonry Philippines Inc.</strong> — Credit & Collection Staff (Sep 2019 – Apr 2020)</li>
+    <li><strong>Filstar Distributors Corp.</strong> — Accounting Coordinator – AR (Aug 2016 – Dec 2018)</li>
+    <li><strong>Office Depot Corp.</strong> — Accounting Staff / Data Analyst (Jan 2016 – Jul 2016)</li>
+    <li><strong>FBM Construction</strong> — Electrician (Sep 2009 – Jan 2015)</li>
+  </ul>
+</section>
+
+<section id="skills">
+  <h2><i class="fas fa-cogs icon"></i>Skills</h2>
+  <ul class="skills">
+    <li>Credit & Collection Management</li>
+    <li>Accounts Receivable & Reconciliation</li>
+    <li>Inventory Analysis (SAP, QuickBooks, Dynamics 365)</li>
+    <li>Financial Reporting & Forecasting</li>
+    <li>VAT Filing & Compliance</li>
+    <li>Client Communication & AR Aging Management</li>
+  </ul>
+</section>
+
+<section id="contact" class="contact">
+  <h2><i class="fas fa-envelope icon"></i>Contact</h2>
+  <p>📞 Phone: <a href="tel:09360620945">09360620945</a></p>
+  <p>📧 Email: <a href="mailto:raysilot25@gmail.com">raysilot25@gmail.com</a></p>
+  <
