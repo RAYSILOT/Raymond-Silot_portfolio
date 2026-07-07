@@ -3,68 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Raymond Silot Portfolio</title>
+  <link rel="stylesheet" href="style.css">
   <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      color: #fff;
-    }
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      max-width: 700px;
-      font-size: 1.2rem;
-    }
-    .projects {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 10px;
-      width: 250px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .contact a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 10px;
-    }
-  </style>
 </head>
 <body>
   <!-- About Section -->
   <section id="about">
     <h1 class="animate__animated animate__fadeInDown">Hi, I'm Raymond</h1>
     <p class="animate__animated animate__fadeInUp animate__delay-1s">
-      Order to Cash Associate at Accenture, passionate about digital design, animation, and portfolio building.
+      Order to Cash Associate at Accenture, passionate about digital design and animation.
     </p>
-    <img src="me.png" alt="Raymond" class="animate__animated animate__zoomIn animate__delay-2s" style="width:180px;border-radius:50%;margin-top:20px;"/>
+    <img src="profile.png" alt="Raymond" class="animate__animated animate__zoomIn animate__delay-2s"/>
   </section>
 
   <!-- Projects Section -->
@@ -95,17 +47,11 @@
     <p class="animate__animated animate__fadeInUp animate__delay-1s">
       Let's collaborate! Reach me through:
     </p>
-    <a href="mailto:raysilot@gmail.com" class="animate__animated animate__fadeInUp animate__delay-2s">Email</a>
-    <a href="https://github.com/raysilot" target="_blank" class="animate__animated animate__fadeInUp animate__delay-2s">GitHub</a>
-    <a href="https://www.linkedin.com/in/raymond-silot" target="_blank" class="animate__animated animate__fadeInUp animate__delay-2s">LinkedIn</a>
+    <a href="mailto:raysilot@gmail.com">Email</a>
+    <a href="https://github.com/raysilot" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/raymond-silot" target="_blank">LinkedIn</a>
   </section>
 
-  <!-- GSAP Animations -->
-  <script>
-    gsap.from("#about h1", {duration: 1, y: -50, opacity: 0});
-    gsap.from("#about p", {duration: 1, y: 50, opacity: 0, delay: 0.5});
-    gsap.from("#projects .card", {duration: 1, y: 50, opacity: 0, stagger: 0.3});
-    gsap.from("#contact h1", {duration: 1, scale: 0.8, opacity: 0, delay: 0.5});
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
