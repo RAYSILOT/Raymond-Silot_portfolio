@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raymond R. Silot — Inventory &amp; Accounting Analyst</title>
+<meta name="description" content="Portfolio of Raymond R. Silot, Inventory &amp; Accounting Analyst.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05070a;
+    --panel:#0d1117;
+    --panel-2:#10141b;
+    --accent:#ffb454;
+    --accent-dim:#7a5a2e;
+    --text:#e8e6df;
+    --text-dim:#8b8d92;
+    --line:rgba(255,180,84,0.16);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    overflow:hidden;
+    position:relative;
+  }
+  /* subtle scanline / grain overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index:9998;
+  }
+  /* vignette */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    z-index:9997;
+  }
+
+  /* ---------- boot overlay ---------- */
+  #boot{
+    position:fixed;inset:0;
+    background:var(--bg);
+    z-index:10000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--mono);
+    color:var(--accent);
+    transition:opacity .6s ease;
+  }
+  #boot .lines{
+    width:min(90vw, 560px);
+    font-size:14px;
+    line-height:1.9;
+  }
+  #boot .lines span{opacity:0;display:block;white-space:pre-wrap;}
+  #boot .cursor{
+    display:inline-block;width:8px;height:14px;background:var(--accent);
+    margin-left:4px;animation:blink 1s step-end infinite;vertical-align:middle;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- slides ---------- */
+  #stage{
+    position:relative;
+    height:100vh;
+    width:100vw;
+  }
+  .slide{
+    position:absolute;inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    padding:8vh 9vw;
+    opacity:0;
+    transform:translateY(24px);
+    pointer-events:none;
+    transition:opacity .55s ease, transform .6s ease;
+  }
+  .slide.active{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:20px;height:1px;background:var(--accent-dim);
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:6vw;
+    width:100%;
+  }
+  .hero-text{max-width:640px;}
+
+  .photo-frame{
+    position:relative;
+    width:min(30vw, 300px);
+    aspect-ratio:1/1;
+    justify-self:end;
+  }
+  .photo-frame img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:top center;
+    filter:grayscale(1) contrast(1.08) brightness(0.95) sepia(0.55) hue-rotate(-8deg) saturate(2.2);
+    display:block;
+  }
+  .photo-frame::before,
+  .photo-frame::after{
+    content:"";
+    position:absolute;
+    width:26px;height:26px;
+    border-color:var(--accent);
+    border-style:solid;
+    z-index:2;
+  }
+  .photo-frame::before{
+    top:-10px;left:-10px;
+    border-width:2px 0 0 2px;
+  }
+  .photo-frame::after{
+    bottom:-10px;right:-10px;
+    border-width:0 2px 2px 0;
+  }
+  .frame-corner-tr,.frame-corner-bl{
+    position:absolute;width:26px;height:26px;border-color:var(--accent-dim);border-style:solid;
+  }
+  .frame-corner-tr{top:-10px;right:-10px;border-width:2px 2px 0 0;}
+  .frame-corner-bl{bottom:-10px;left:-10px;border-width:0 0 2px 2px;}
+  .photo-frame .glow{
+    position:absolute;inset:0;
+    box-shadow:0 0 40px rgba(255,180,84,0.18), inset 0 0 60px rgba(0,0,0,0.5);
+    pointer-events:none;
+  }
+  .photo-tag{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.12em;
+    color:var(--accent-dim);
+    margin-top:14px;
+    text-align:center;
+    text-transform:uppercase;
+  }
+
+  @media (max-width:800px){
+    .hero-grid{grid-template-columns:1fr;gap:32px;}
+    .photo-frame{width:min(48vw, 200px);justify-self:start;}
+  }
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:clamp(34px, 6vw, 64px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    color:var(--text);
+  }
+  h1 .accent{color:var(--accent);}
+
+  .role{
+    font-family:var(--mono);
+    color:var(--text-dim);
+    font-size:clamp(14px,1.6vw,18px);
+    margin-top:14px;
+    letter-spacing:.02em;
+  }
+
+  .lede{
+    max-width:640px;
+    margin-top:26px;
+    font-size:17px;
+    line-height:1.7;
+    color:var(--text-dim);
+  }
+
+  h2{
+    font-family:var(--mono);
+    font-size:clamp(22px,3vw,32px);
+    color:var(--text);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+
+  .section-index{
+    font-family:var(--mono);
+    color:var(--accent-dim);
+    font-size:13px;
+    margin-bottom:24px;
+  }
+
+  /* about slide stats */
+  .stat-row{display:flex;gap:48px;margin-top:36px;flex-wrap:wrap;}
+  .stat{font-family:var(--mono);}
+  .stat .n{color:var(--accent);font-size:28px;font-weight:600;}
+  .stat .l{color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;}
+
+  /* experience log */
+  .log{
+    width:100%;
+    max-width:820px;
+    max-height:62vh;
+    overflow-y:auto;
+    margin-top:8px;
+    padding-right:14px;
+  }
+  .log::-webkit-scrollbar{width:5px;}
+  .log::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:4px;}
+
+  .entry{
+    border-left:2px solid var(--line);
+    padding:4px 0 22px 22px;
+    position:relative;
+    margin-bottom:6px;
+  }
+  .entry::before{
+    content:"";
+    position:absolute;left:-5px;top:6px;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+  }
+  .entry .co{
+    font-family:var(--mono);
+    font-size:16px;
+    color:var(--text);
+    font-weight:600;
+  }
+  .entry .role-title{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    margin-top:2px;
+  }
+  .entry .dates{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-dim);
+    margin-top:4px;
+    letter-spacing:.03em;
+  }
+  .entry ul{
+    margin-top:10px;
+    padding-left:18px;
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.65;
+  }
+  .entry ul li{margin-bottom:3px;}
+
+  /* skills */
+  .tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;max-width:760px;}
+  .tag{
+    font-family:var(--mono);
+    font-size:13px;
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    color:var(--text);
+    background:var(--panel);
+    position:relative;
+  }
+  .tag::before{content:"● ";color:var(--accent);font-size:9px;}
+
+  /* education */
+  .edu-item{margin-top:22px;}
+  .edu-item .school{font-family:var(--mono);font-size:17px;color:var(--text);}
+  .edu-item .deg{color:var(--text-dim);font-size:14px;margin-top:4px;}
+  .edu-item .yrs{font-family:var(--mono);font-size:11.5px;color:var(--accent-dim);margin-top:4px;}
+
+  /* contact */
+  .contact-link{
+    font-family:var(--mono);
+    font-size:20px;
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid var(--accent-dim);
+    padding-bottom:2px;
+    margin-top:28px;
+    display:inline-block;
+  }
+  .contact-link:hover{color:var(--text);border-color:var(--text);}
+
+  /* nav dots */
+  #dots{
+    position:fixed;
+    right:5vw;top:50%;
+    transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:14px;
+    z-index:100;
+  }
+  #dots button{
+    width:9px;height:9px;border-radius:50%;
+    background:transparent;
+    border:1px solid var(--accent-dim);
+    cursor:pointer;padding:0;
+    transition:.25s;
+  }
+  #dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 8px var(--accent);}
+
+  /* bottom bar */
+  #bar{
+    position:fixed;bottom:5vh;left:9vw;right:9vw;
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    z-index:100;
+  }
+  #bar .count{letter-spacing:.05em;}
+  #bar .hint{opacity:.7;}
+  .arrows{display:flex;gap:10px;}
+  .arrows button{
+    font-family:var(--mono);
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text);
+    width:34px;height:34px;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .arrows button:hover{border-color:var(--accent);color:var(--accent);}
+
+  @media (max-width:640px){
+    #dots{display:none;}
+    .slide{padding:12vh 7vw;}
+    .stat-row{gap:28px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .slide, #boot{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="boot">
+  <div class="lines" id="bootLines"></div>
+</div>
+
+<div id="stage">
+
+  <!-- Slide 0: Hero -->
+  <section class="slide" data-index="0">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">profile / 01</div>
+        <h1>RAYMOND R.<br><span class="accent">SILOT</span></h1>
+        <div class="role">Credit Controller · Order to Cash Associate</div>
+        <p class="lede">Eight years across AR, collections, and inventory reconciliation — from provincial warehouse counts to multi-country accounts receivable for clients in the US, China, Egypt, and India.</p>
+      </div>
+      <div class="photo-frame">
+        <img src="assets/profile.png" alt="Raymond R. Silot">
+        <div class="glow"></div>
+        <div class="frame-corner-tr"></div>
+        <div class="frame-corner-bl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 1: About -->
+  <section class="slide" data-index="1">
+    <div class="section-index">// 02 — objective</div>
+    <h2>What I'm looking for</h2>
+    <p class="lede" style="margin-top:18px;">A stable, dynamic workplace where I can keep building on the accounting and inventory skills I've developed — from manual stock counts to enterprise ERP postings.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="n">8+</div><div class="l">years in accounting, AR &amp; inventory</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">roles across 8 companies</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">countries reconciled — US, China, Egypt, India</div></div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Experience -->
+  <section class="slide" data-index="2">
+    <div class="section-index">// 03 — work log</div>
+    <h2>Experience</h2>
+    <div class="log">
+
+      <div class="entry">
+        <div class="co">Accenture Inc.</div>
+        <div class="role-title">Order to Cash Associate — Credit Controller / Credit &amp; Collection (Fonterra account, Auckland, remote)</div>
+        <div class="dates">Nov 2024 — Present</div>
+        <ul>
+          <li>Manage accounts receivable for credit and collection on an owned customer portfolio</li>
+          <li>Handle order releasing, chargebacks, and invoice/deduction reporting and forecasting</li>
+          <li>Identify issues and coordinate with the appropriate team for resolution</li>
+          <li>Handle write-offs and refunds, and report monthly on account status to client management and directors</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">VXI Global Solution Inc.</div>
+        <div class="role-title">Customer Account Specialist / AR</div>
+        <div class="dates">Jul 2024 — Oct 2024</div>
+        <ul>
+          <li>Handled AR and collection reporting and reconciliation across the US, China, Egypt, and India</li>
+          <li>Recorded billing invoices and monthly accrued revenue reversals in Workday</li>
+          <li>Prepared AR reports, reconciled collections to the books, and monitored outstanding balances</li>
+          <li>Sent statements of account and followed up with VPs on overdue invoices</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">NTT Limited Philippines Branch</div>
+        <div class="role-title">Collection Specialist</div>
+        <div class="dates">Oct 2022 — Jun 2024</div>
+        <ul>
+          <li>Validated invoices for posting and reconciled outstanding accounts and bank statements per client</li>
+          <li>Ran daily/weekly follow-ups and semi-monthly statements of account, plus debt consolidation processing</li>
+          <li>Encoded and reconciled daily collections in Dynamics 365 &amp; QuickBooks; sent weekly AR reports to management</li>
+          <li>Filed monthly &amp; quarterly VAT returns and reliefs with the BIR, and supported month-end close</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">Avolution Inc.</div>
+        <div class="role-title">Accounting Assistant / Inventory Analyst</div>
+        <div class="dates">Jul 2021 — Oct 2022</div>
+        <ul>
+          <li>Tracked daily stock in/out and processed local &amp; international purchase orders</li>
+          <li>Handled delivery receipts, sales invoices, and transmittals</li>
+          <li>Submitted monthly sales &amp; inventory reports, ran quarterly physical counts and reconciliations</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">Philippine Vending Group of Companies</div>
+        <div class="role-title">Accounting Assistant / Inventory Analyst</div>
+        <div class="dates">Jun 2020 — Jul 2021</div>
+        <ul>
+          <li>Posted and reconciled inventory in SAP Business One</li>
+          <li>Delivered Days Cover and Consolidated Ending Inventory reports</li>
+          <li>Reconciled inventory counts across Baguio, Laguna &amp; Pampanga sites</li>
+          <li>Handled COGS postings, cost estimates, and internal cost audits</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">Smart Masonry Philippines Inc.</div>
+        <div class="role-title">Credit and Collection Staff</div>
+        <div class="dates">Sep 2019 — Apr 2020</div>
+        <ul>
+          <li>Audited project inventory and expenses</li>
+          <li>Followed up on employee cash advances and overdue client billing</li>
+          <li>Supported collections calls and maintained credit history files</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">Filstar Distributors Corp.</div>
+        <div class="role-title">Accounting Coordinator — A/R</div>
+        <div class="dates">Aug 2016 — Dec 2018</div>
+        <ul>
+          <li>Built customer profiles and verified legal documentation</li>
+          <li>Reconciled monthly sales and posted discounts, returns &amp; price differences</li>
+          <li>Validated invoices and resolved consignment discrepancies</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">Office Depot Corp.</div>
+        <div class="role-title">Accounting Staff / Data Analyst</div>
+        <div class="dates">Jan 2016 — Jul 2016</div>
+        <ul>
+          <li>Summarized and reconciled monthly sales</li>
+          <li>Reconciled inventory and handled data encoding</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="co">FBM Construction</div>
+        <div class="role-title">Electrician</div>
+        <div class="dates">Sep 2009 — Jan 2015</div>
+        <ul>
+          <li>Electrical layout, wiring installation, and repair</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Slide 3: Skills -->
+  <section class="slide" data-index="3">
+    <div class="section-index">// 04 — systems &amp; skills</div>
+    <h2>What I work with</h2>
+    <div class="tags">
+      <div class="tag">SAP Business One</div>
+      <div class="tag">Workday</div>
+      <div class="tag">Dynamics 365</div>
+      <div class="tag">QuickBooks</div>
+      <div class="tag">Credit Control &amp; Collections</div>
+      <div class="tag">AR Reconciliation</div>
+      <div class="tag">Bank Reconciliation</div>
+      <div class="tag">Inventory Reconciliation</div>
+      <div class="tag">Cost Analysis &amp; Audits</div>
+      <div class="tag">VAT / BIR Filing</div>
+      <div class="tag">SOA &amp; Aging Reports</div>
+      <div class="tag">Multi-country AR (US/China/Egypt/India)</div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Education -->
+  <section class="slide" data-index="4">
+    <div class="section-index">// 05 — education</div>
+    <h2>Education</h2>
+    <div class="edu-item">
+      <div class="school">ICCT Colleges Foundation Inc.</div>
+      <div class="deg">B.S. Business Administration, Major in Financial Management</div>
+      <div class="yrs">2011 — 2015</div>
+    </div>
+    <div class="edu-item">
+      <div class="school">Payas National High School</div>
+      <div class="yrs">2002 — 2006</div>
+    </div>
+    <div class="edu-item">
+      <div class="school">Payas Elementary School</div>
+      <div class="yrs">1996 — 2002</div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Contact -->
+  <section class="slide" data-index="5">
+    <div class="section-index">// 06 — contact</div>
+    <h2>Let's talk</h2>
+    <p class="lede">Open to accounting, inventory, and analyst roles. Reach out any time.</p>
+    <a class="contact-link" href="mailto:raysilot25@gmail.com">raysilot25@gmail.com</a>
+  </section>
+
+</div>
+
+<div id="dots"></div>
+
+<div id="bar">
+  <div class="count"><span id="curIdx">01</span> / <span id="totalIdx">06</span></div>
+  <div class="hint">← → or swipe to navigate</div>
+  <div class="arrows">
+    <button id="prevBtn" aria-label="Previous slide">←</button>
+    <button id="nextBtn" aria-label="Next slide">→</button>
+  </div>
+</div>
+
+<script>
+  // ---- boot sequence ----
+  const bootLines = [
+    "> initializing profile...",
+    "> loading RAYMOND R. SILOT",
+    "> role: inventory & accounting analyst",
+    "> access granted_"
+  ];
+  const bootEl = document.getElementById('bootLines');
+  bootLines.forEach((t,i)=>{
+    const s = document.createElement('span');
+    s.textContent = t;
+    s.style.animationDelay = (i*0.45)+'s';
+    s.style.animation = 'fadeIn .4s forwards';
+    s.style.animationDelay = (i*0.45)+'s';
+    bootEl.appendChild(s);
+  });
+  const styleTag = document.createElement('style');
+  styleTag.textContent = '@keyframes fadeIn{to{opacity:1;}}';
+  document.head.appendChild(styleTag);
+
+  setTimeout(()=>{
+    const boot = document.getElementById('boot');
+    boot.style.opacity = '0';
+    setTimeout(()=> boot.style.display='none', 650);
+  }, 2100);
+
+  // ---- slideshow ----
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  let current = 0;
+
+  slides.forEach((_,i)=>{
+    const b = document.createElement('button');
+    b.addEventListener('click', ()=> goTo(i));
+    dotsWrap.appendChild(b);
+  });
+  const dotButtons = Array.from(dotsWrap.children);
+
+  function render(){
+    slides.forEach((s,i)=> s.classList.toggle('active', i===current));
+    dotButtons.forEach((d,i)=> d.classList.toggle('active', i===current));
+    document.getElementById('curIdx').textContent = String(current+1).padStart(2,'0');
+  }
+
+  function goTo(i){
+    current = Math.max(0, Math.min(slides.length-1, i));
+    render();
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', ()=> goTo(current+1));
+  document.getElementById('prevBtn').addEventListener('click', ()=> goTo(current-1));
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') goTo(current+1);
+    if(e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  // swipe support
+  let touchStartX = null;
+  window.addEventListener('touchstart', e=> touchStartX = e.touches[0].clientX, {passive:true});
+  window.addEventListener('touchend', e=>{
+    if(touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 50){ dx < 0 ? goTo(current+1) : goTo(current-1); }
+    touchStartX = null;
+  }, {passive:true});
+
+  render();
+</script>
+
+</body>
+</html>
